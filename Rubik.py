@@ -1,4 +1,5 @@
 from Algorithms import *
+import random
 
 class Rubik(Problem):
     """
@@ -13,9 +14,11 @@ class Rubik(Problem):
              (u,u,u,u,u,u,u,u,u,d,d,d,d,d,d,d,d,d,l,l,l,l,l,l,l,l,l,r,r,r,r,r,r,r,r,r,f,f,f,f,f,f,f,f,f,b,b,b,b,b,b,b,b,b)
              (1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9)
 
-    moves = { 'U':[(0,1,2,3,5,6,7,8,18,19,20,27,28,29,36,37,38,45,46,47),(6,3,0,7,1,8,5,2,36,37,38,45,46,47,27,28,29,,18,19,20)]}
     """
-
+    # moves:    Dictionary that defines the name of the move based on the face that is rotated
+    #           and a list with 2 tuples that correspond to the source and destination indexes
+    #           that are swapped during that face rotation.  Reversing source and dest is the
+    #           opposite rotation.  Upper case means clockwise and lower case means counter.
     moves = { 'U':[ ( 0, 1, 2, 3, 5, 6, 7, 8,18,19,20,27,28,29,36,37,38,45,46,47),
                     ( 6, 3, 0, 7, 1, 8, 5, 2,36,37,38,45,46,47,27,28,29,18,19,20) ],
               'D':[ ( 9,10,11,12,14,15,16,17,24,25,26,33,34,35,42,43,44,51,52,53),
@@ -37,9 +40,11 @@ class Rubik(Problem):
         return state == self.goal
 
     def next_states(self, state):
-        #todo: generate all 12 available moves
         result = []
 
+        for face in self.moves.keys():
+            result.append( (face, self.apply_move(state, face, True)) )
+            result.append( (face.lower(), self.apply_move(state, face, False)) )
 
         return result
 
@@ -79,14 +84,18 @@ if __name__ == "__main__":
     goal = start
 
     cube = Rubik(start, goal)
-    state = cube.apply_move(start, 'R', False)
+    state = start
+
+    choices = list(cube.moves.keys())
+    for i in range(10):
+        state = cube.apply_move(state, random.choice(choices), bool(random.getrandbits(1)) )
 
     problem = Rubik(state, goal)
 
-    problem.test(state)
+    #problem.test(state)
 
-    print("\nDFS")
-    dfs(problem)
+    #print("\nDFS")
+    #dfs(problem)
 
     print("\nBFS")
     bfs(problem)
