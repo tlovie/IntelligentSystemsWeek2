@@ -87,7 +87,7 @@ if __name__ == "__main__":
     state = start
 
     choices = list(cube.moves.keys())
-    for i in range(10):
+    for i in range(7):
         state = cube.apply_move(state, random.choice(choices), bool(random.getrandbits(1)) )
 
     problem = Rubik(state, goal)
@@ -97,8 +97,8 @@ if __name__ == "__main__":
     #print("\nDFS")
     #dfs(problem)
 
-    print("\nBFS")
-    bfs(problem)
+    #print("\nBFS")
+    #bfs(problem)
 
     print("\nIDDFS")
     iddfs(problem)
