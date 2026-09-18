@@ -87,8 +87,14 @@ if __name__ == "__main__":
     state = start
 
     choices = list(cube.moves.keys())
+    old_choice = 'R'
     for i in range(7):
-        state = cube.apply_move(state, random.choice(choices), bool(random.getrandbits(1)) )
+        while True:
+            random_choice = random.choice(choices) 
+            if random_choice != old_choice:
+                break
+        old_choice = random_choice
+        state = cube.apply_move(state, random_choice, bool(random.getrandbits(1)) )
 
     problem = Rubik(state, goal)
 
