@@ -7,7 +7,7 @@ class Rubik(Problem):
         - each face is length 9
         - colors are represented by the digits 1->6
         - allowable moves are clockwise and counter clockwise for each face
-    
+
     Example:
     solved = (1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6)
              (u,u,u,u,u,u,u,u,u,d,d,d,d,d,d,d,d,d,l,l,l,l,l,l,l,l,l,r,r,r,r,r,r,r,r,r,f,f,f,f,f,f,f,f,f,b,b,b,b,b,b,b,b,b)
@@ -16,9 +16,9 @@ class Rubik(Problem):
     moves = { 'U':[(0,1,2,3,5,6,7,8,18,19,20,27,28,29,36,37,38,45,46,47),(6,3,0,7,1,8,5,2,36,37,38,45,46,47,27,28,29,,18,19,20)]}
     """
 
-    moves = { 'U':[ ( 0, 1, 2, 3, 5, 6, 7, 8,18,19,20,27,28,29,36,37,38,45,46,47), 
+    moves = { 'U':[ ( 0, 1, 2, 3, 5, 6, 7, 8,18,19,20,27,28,29,36,37,38,45,46,47),
                     ( 6, 3, 0, 7, 1, 8, 5, 2,36,37,38,45,46,47,27,28,29,18,19,20) ],
-              'D':[ ( 9,10,11,12,14,15,16,17,24,25,26,33,34,35,42,43,44,51,52,53), 
+              'D':[ ( 9,10,11,12,14,15,16,17,24,25,26,33,34,35,42,43,44,51,52,53),
                     (15,12, 9,16,10,17,14,11,51,52,53,42,43,44,24,25,26,33,34,35) ],
               'L':[ (18,19,20,21,23,24,25,26, 0, 3, 6, 9,12,15,36,39,42,47,50,53),
                     (24,21,18,25,19,26,23,20,53,50,47,36,39,42, 0, 3, 6,15,12, 9) ],
@@ -40,7 +40,6 @@ class Rubik(Problem):
         #todo: generate all 12 available moves
         result = []
 
-        result.append(  )
 
         return result
 
@@ -57,6 +56,17 @@ class Rubik(Problem):
 
         return tuple(new_state)
 
+    def test(self, state):
+
+        result = []
+
+        print("begin test")
+
+        for key, val in self.moves.items():
+            print( key, self.apply_move(state, key, True) )
+
+        return result
+
 
 
 if __name__ == "__main__":
@@ -69,9 +79,11 @@ if __name__ == "__main__":
     goal = start
 
     cube = Rubik(start, goal)
-    state = cube.apply_move(start, 'R', True)
+    state = cube.apply_move(start, 'R', False)
 
     problem = Rubik(state, goal)
+
+    problem.test(state)
 
     print("\nDFS")
     dfs(problem)
