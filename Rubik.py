@@ -87,8 +87,8 @@ if __name__ == "__main__":
     state = start
 
     choices = list(cube.moves.keys())
-    old_choice = 'R'
-    for i in range(7):
+    old_choice = 'B'
+    for i in range(9):
         while True:
             random_choice = random.choice(choices) 
             if random_choice != old_choice:
