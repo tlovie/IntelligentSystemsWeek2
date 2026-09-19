@@ -78,11 +78,11 @@ if __name__ == "__main__":
 
     problem = EightPuzzleProblem(start, goal)
 
-    print("\nBFS")
-    bfs(problem)
-
     print("\nDFS")
     dfs(problem)
+
+    print("\nBFS")
+    bfs(problem)
 
     print("\nIDDFS")
     iddfs(problem)
