@@ -56,8 +56,8 @@ if __name__ == "__main__":
     print("\nBFS")
     bfs(problem)
 
-    #print("\nIDDFS")
-    #iddfs(problem)
+    print("\nIDDFS")
+    iddfs(problem)
 
     print("\nUCS")
     ucs(problem)
